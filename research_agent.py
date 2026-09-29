@@ -58,7 +58,7 @@ def run_research(topic: str, api_key: str) -> str:
         allow_delegation=False,
     )
 
-    task = Task(
+        task = Task(
         description=(
             f"Research the topic: {topic}\n"
             "Use the search tool several times with different queries. "
@@ -67,7 +67,11 @@ def run_research(topic: str, api_key: str) -> str:
         expected_output=(
             "A markdown report with: a title, an executive summary, "
             "3-5 key sections with headings, a short conclusion, "
-            "and a 'Sources' list containing the URLs you used."
+            "and a 'Sources' list containing the URLs you used. "
+            "Do NOT use inline citation markers like 【5†L1-L4】 or [1] or footnote-style "
+            "references anywhere in the text. Instead, when referring to a source inline, "
+            "mention it naturally in plain words, e.g. 'according to TrueUp data' or "
+            "'as reported by Business Insider'. Keep the writing clean and readable."
         ),
         agent=researcher,
     )
