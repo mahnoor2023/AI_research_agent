@@ -28,11 +28,9 @@ def duckduckgo_search(query: str) -> str:
 
 
 def build_llm(api_key: str) -> LLM:
-    # Groq has an OpenAI-compatible API, so we use the "openai/" provider
-    # with Groq's base_url. No litellm needed.
+    # "openai/" here is CrewAI's provider prefix (it gets stripped).
+    # What's left, "openai/gpt-oss-120b", is Groq's real model ID.
     return LLM(
-        # "openai/" here is CrewAI's provider prefix (it gets stripped).
-        # What's left, "openai/gpt-oss-120b", is Groq's real model ID.
         model="openai/openai/gpt-oss-120b",
         base_url="https://api.groq.com/openai/v1",
         api_key=api_key,
@@ -58,7 +56,7 @@ def run_research(topic: str, api_key: str) -> str:
         allow_delegation=False,
     )
 
-        task = Task(
+    task = Task(
         description=(
             f"Research the topic: {topic}\n"
             "Use the search tool several times with different queries. "
