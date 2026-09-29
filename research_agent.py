@@ -31,7 +31,9 @@ def build_llm(api_key: str) -> LLM:
     # Groq has an OpenAI-compatible API, so we use the "openai/" provider
     # with Groq's base_url. No litellm needed.
     return LLM(
-        model="openai/gpt-oss-120b",
+        # "openai/" here is CrewAI's provider prefix (it gets stripped).
+        # What's left, "openai/gpt-oss-120b", is Groq's real model ID.
+        model="openai/openai/gpt-oss-120b",
         base_url="https://api.groq.com/openai/v1",
         api_key=api_key,
         temperature=0.3,
